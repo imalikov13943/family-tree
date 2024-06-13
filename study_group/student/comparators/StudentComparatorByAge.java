@@ -1,8 +1,8 @@
 package study_group.student.comparators;
 
-import study_group.student.Student;
-
 import java.util.Comparator;
+
+import study_group.student.Student;
 
 public class StudentComparatorByAge implements Comparator<Student> {
     @Override

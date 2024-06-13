@@ -1,9 +1,9 @@
 package study_group.study_group;
 
-import study_group.student.Student;
-
 import java.util.Iterator;
 import java.util.List;
+
+import study_group.student.Student;
 
 public class StudentIterator implements Iterator<Student> {
     private int index;

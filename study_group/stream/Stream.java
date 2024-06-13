@@ -1,10 +1,10 @@
 package study_group.stream;
 
-import study_group.study_group.StudyGroup;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import study_group.study_group.StudyGroup;
 
 public class Stream implements Iterable<StudyGroup> {
     private List<StudyGroup> studyGroups;

@@ -1,38 +1,57 @@
 package study_group.study_group;
 
-import study_group.student.comparators.StudentComparatorByAge;
-import study_group.student.comparators.StudentComparatorByName;
 import study_group.student.Student;
+import study_group.teacher.Teacher;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class StudyGroup implements Iterable<Student> {
-    private List<Student> studentList;
+public class StudyGroup {
+    private Teacher teacher;
+    private List<Student> students;
 
     public StudyGroup() {
-        studentList = new ArrayList<>();
+        this.students = new ArrayList<>();
     }
 
-    public void addStudent(Student student){
-        studentList.add(student);
+    public StudyGroup(Teacher teacher, List<Student> students) {
+        this.teacher = teacher;
+        this.students = students;
     }
 
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void sortByName(){
-        studentList.sort(new StudentComparatorByName());
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public void sortByAge(){
-        studentList.sort(new StudentComparatorByAge());
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     @Override
-    public Iterator<Student> iterator() {
-        return new StudentIterator(studentList);
+    public String toString() {
+        return "StudyGroup{" +
+                "teacher=" + teacher +
+                ", students=" + students +
+                '}';
+    }
+
+    public void sortByName() {
+        students.sort(new study_group.student.comparators.StudentComparatorByName());
+    }
+
+    public void sortByAge() {
+        students.sort(new study_group.student.comparators.StudentComparatorByAge());
     }
 }
