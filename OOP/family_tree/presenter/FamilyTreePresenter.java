@@ -1,38 +1,63 @@
 package OOP.family_tree.presenter;
 
+import OOP.family_tree.model.FamilyMember;
 import OOP.family_tree.model.FamilyTree;
-import OOP.family_tree.model.Human;
+import OOP.family_tree.service.FamilyTreeService;
 import OOP.family_tree.view.FamilyTreeView;
 
-public class FamilyTreePresenter {
-    private FamilyTreeView view;
-    private FamilyTree<Human> model;
+public class FamilyTreePresenter<T extends FamilyMember<T>> {
+    private FamilyTreeView<T> view;
+    private FamilyTreeService<T> service;
 
-    public FamilyTreePresenter(FamilyTreeView view, FamilyTree<Human> model) {
+    public FamilyTreePresenter(FamilyTreeView<T> view, FamilyTree<T> model) {
         this.view = view;
-        this.model = model;
+        this.service = new FamilyTreeService<>(model);
+        view.setPresenter(this);
     }
 
-    public void addMember(Human member) {
-        model.addMember(member);
+    public void addMember(T member) {
+        service.addMember(member);
+        view.displayMessage("Участник добавлен: " + member.getName());
     }
 
-    public void findMemberByName(String name) {
-        Human member = model.findMemberByName(name);
+    public T findMemberByName(String name) {
+        T member = service.findMemberByName(name);
         if (member != null) {
             view.displayMember(member);
         } else {
-            view.displayMessage("Member not found");
+            view.displayMessage("Участник не найден");
         }
+        return member;
     }
 
     public void sortByName() {
-        model.sortByName();
-        view.displayMembers(model);
+        service.sortByName();
+        view.displayMembers(service.getFamilyTree());
     }
 
     public void sortByBirthDate() {
-        model.sortByBirthDate();
-        view.displayMembers(model);
+        service.sortByBirthDate();
+        view.displayMembers(service.getFamilyTree());
+    }
+
+    public void saveFamilyTree(String filename) {
+        service.saveFamilyTree(filename);
+        view.displayMessage("Семейное дерево сохранено в " + filename);
+    }
+
+    public void loadFamilyTree(String filename) {
+        FamilyTree<T> loadedTree = service.loadFamilyTree(filename);
+        if (loadedTree != null) {
+            service.setFamilyTree(loadedTree);
+            view.displayMessage("Семейное дерево загружено из " + filename);
+            view.displayMembers(loadedTree);
+        } else {
+            view.displayMessage("Не удалось загрузить семейное дерево из " + filename);
+        }
+    }
+
+    public void addChild(T parent, T child) {
+        service.addChild(parent, child);
+        view.displayMessage("Ребенок " + child.getName() + " добавлен к родителю " + parent.getName());
     }
 }

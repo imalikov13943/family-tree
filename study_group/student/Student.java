@@ -1,5 +1,6 @@
 package study_group.student;
 
+// SRP: Этот класс представляет студента с основными подробностями.
 public class Student implements Comparable<Student>{
     private int id;
     private String name;

@@ -5,15 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements FamilyMember<Human> {
-    private static final long serialVersionUID = 1L;
-
     private String name;
-    private Human mother;
-    private Human father;
-    private List<Human> children;
-    private LocalDate birthDate;
-    private LocalDate deathDate;
     private Gender gender;
+    private LocalDate birthDate;
+    private List<Human> children;
 
     public Human(String name, Gender gender, LocalDate birthDate) {
         this.name = name;
@@ -27,20 +22,9 @@ public class Human implements FamilyMember<Human> {
         return name;
     }
 
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
+    @Override
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     @Override
@@ -49,23 +33,6 @@ public class Human implements FamilyMember<Human> {
     }
 
     public void addChild(Human child) {
-        this.children.add(child);
-    }
-
-    @Override
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-    public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
-    }
-
-    public Gender getGender() {
-        return gender;
+        children.add(child);
     }
 }

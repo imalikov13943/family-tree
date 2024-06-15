@@ -1,5 +1,6 @@
 package study_group.teacher;
 
+// SRP: Этот класс представляет преподавателя с основными подробностями.
 public class Teacher {
     private int id;
     private String name;

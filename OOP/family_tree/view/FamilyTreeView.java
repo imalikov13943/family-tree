@@ -1,10 +1,12 @@
 package OOP.family_tree.view;
 
-import OOP.family_tree.model.Human;
+import OOP.family_tree.model.FamilyMember;
 import OOP.family_tree.model.FamilyTree;
+import OOP.family_tree.presenter.FamilyTreePresenter;
 
-public interface FamilyTreeView {
-    void displayMember(Human member);
+public interface FamilyTreeView<T extends FamilyMember<T>> {
+    void displayMember(T member);
     void displayMessage(String message);
-    void displayMembers(FamilyTree<Human> familyTree);
+    void displayMembers(FamilyTree<T> familyTree);
+    void setPresenter(FamilyTreePresenter<T> presenter);
 }
